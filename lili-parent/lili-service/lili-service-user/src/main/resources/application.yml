@@ -1,0 +1,46 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: user
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/lili?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 300000
+      connection-test-query: SELECT 1
+
+# mybatis
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.lirt.entity
+
+# 分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+# 打印sql
+logging:
+  level:
+    com.lirt.service.user.mapper: debug
+
+eureka:
+  client:
+    register-with-eureka: true #是否将自己注册到注册中心
+    fetch-registry: true       #是否从eureka获取信息
+    service-url:
+      defaultZone: http://127.0.0.1:8000/eureka
+  instance:
+    prefer-ip-address: true
